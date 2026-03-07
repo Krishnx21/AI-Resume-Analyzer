@@ -1,124 +1,98 @@
 import React from "react";
 
-function StatCard({ label, value, helper }) {
-  return (
-    <div className="stat-card">
-      <div className="stat-label">{label}</div>
-      <div className="stat-value">{value}%</div>
-      {helper && <div className="stat-helper">{helper}</div>}
-    </div>
-  );
-}
+const DEMO_SCORE = 86;
+const DEMO_MISSING_SKILLS = [
+  "GraphQL",
+  "System design",
+  "Mentoring",
+  "Public speaking",
+];
+const DEMO_SUGGESTIONS = [
+  {
+    title: "Tell a sharper story in your summary",
+    body: "Open with one sentence that anchors your role, years of experience, and the type of problems you love solving. Avoid buzzwords that don’t map to measurable impact.",
+  },
+  {
+    title: "Quantify 2–3 more achievements",
+    body: "Convert generic responsibilities into outcomes. Mention shipped features, revenue impact, or performance gains wherever you can provide credible numbers.",
+  },
+  {
+    title: "Align skills to the roles you want",
+    body: "Group your skills into clear categories and make sure the top 6–8 match the job descriptions you are actually applying to.",
+  },
+];
 
-export function ResultDashboard({ analysisResult, hasFile, isAnalyzing }) {
-  if (!analysisResult) {
+export function ResultDashboard({ hasAnalyzed }) {
+  if (!hasAnalyzed) {
     return (
-      <div className="empty-state">
-        <h2 className="section-title">Analysis dashboard</h2>
-        <p className="section-subtitle">
-          {isAnalyzing
-            ? "Running AI analysis on your resume. This typically takes just a few seconds."
-            : hasFile
-              ? "You're ready to analyze. Click “Analyze resume” to generate insights."
-              : "Once you upload a resume and run the analysis, your results will appear here."}
+      <section className="results-shell results-shell-empty">
+        <div className="results-label">Preview</div>
+        <h2 className="results-title">Your future score lives here</h2>
+        <p className="results-subtitle">
+          Once you drop in a resume and tap <span>Analyze resume</span>, this
+          space will light up with a score, missing skills, and a short,
+          readable plan of attack.
         </p>
-      </div>
+      </section>
     );
   }
 
-  const {
-    overallScore,
-    matchScore,
-    atsScore,
-    readability,
-    strengths,
-    improvements,
-    keywordsMatched,
-    keywordsMissing,
-    sections,
-  } = analysisResult;
-
   return (
-    <div className="stack gap-lg">
-      <div>
-        <h2 className="section-title">Analysis dashboard</h2>
-        <p className="section-subtitle">
-          Here is how your resume scores and where you can improve.
-        </p>
-      </div>
-
-      <div className="stats-grid">
-        <StatCard label="Overall strength" value={overallScore} />
-        <StatCard label="Role match" value={matchScore} />
-        <StatCard
-          label="ATS friendliness"
-          value={atsScore}
-          helper="Formatting & keyword structure"
-        />
-        <StatCard
-          label="Readability"
-          value={readability}
-          helper="Clarity & scannability"
-        />
-      </div>
-
-      <div className="columns">
-        <div className="card">
-          <h3 className="card-title">Strengths</h3>
-          <ul className="list">
-            {strengths.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="card">
-          <h3 className="card-title">Opportunities</h3>
-          <ul className="list">
-            {improvements.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
+    <section className="results-shell">
+      <div className="results-header">
+        <div>
+          <div className="results-label">Analysis snapshot</div>
+          <h2 className="results-title">How your resume lands at a glance</h2>
         </div>
       </div>
 
-      <div className="columns">
-        <div className="card">
-          <h3 className="card-title">Keyword alignment</h3>
-          <div className="pill-group">
-            {keywordsMatched.map((kw) => (
-              <span key={kw} className="pill pill-positive">
-                {kw}
+      <div className="results-grid">
+        <div className="results-card results-card-score">
+          <div className="score-ring" aria-label="Resume score">
+            <div className="score-ring-track" />
+            <div
+              className="score-ring-fill"
+              style={{ "--score": DEMO_SCORE }}
+            />
+            <div className="score-ring-center">
+              <span className="score-number">{DEMO_SCORE}</span>
+              <span className="score-label">Resume score</span>
+            </div>
+          </div>
+          <p className="score-caption">
+            This is a demo score. Wire in your own API response to calculate it
+            for real resumes.
+          </p>
+        </div>
+
+        <div className="results-card results-card-skills">
+          <h3 className="results-card-title">Missing skills</h3>
+          <p className="results-card-subtitle">
+            Skills your AI layer could suggest adding when they match the roles
+            you care about.
+          </p>
+          <div className="badge-row">
+            {DEMO_MISSING_SKILLS.map((skill) => (
+              <span key={skill} className="badge badge-missing">
+                {skill}
               </span>
             ))}
           </div>
-          {keywordsMissing.length > 0 && (
-            <>
-              <p className="card-subtitle">Consider adding where relevant:</p>
-              <div className="pill-group">
-                {keywordsMissing.map((kw) => (
-                  <span key={kw} className="pill pill-warning">
-                    {kw}
-                  </span>
-                ))}
-              </div>
-            </>
-          )}
         </div>
 
-        <div className="card">
-          <h3 className="card-title">AI notes</h3>
-          <div className="notes-stack">
-            {sections.map((section) => (
-              <div key={section.title} className="note-block">
-                <div className="note-title">{section.title}</div>
-                <p className="note-body">{section.body}</p>
-              </div>
+        <div className="results-card results-card-suggestions">
+          <h3 className="results-card-title">Suggestions</h3>
+          <div className="suggestion-list">
+            {DEMO_SUGGESTIONS.map((item) => (
+              <article key={item.title} className="suggestion-card">
+                <h4 className="suggestion-title">{item.title}</h4>
+                <p className="suggestion-body">{item.body}</p>
+              </article>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

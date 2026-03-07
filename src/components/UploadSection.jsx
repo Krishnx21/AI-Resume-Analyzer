@@ -9,12 +9,7 @@ const ACCEPTED_TYPES = [
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];
 
-export function UploadSection({
-  selectedFile,
-  onFileSelected,
-  onAnalyze,
-  isAnalyzing,
-}) {
+export function UploadSection({ selectedFile, onFileSelected, onAnalyze }) {
   const inputRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState("");
@@ -68,12 +63,12 @@ export function UploadSection({
   };
 
   return (
-    <div className="stack gap-lg">
-      <div>
-        <h2 className="section-title">Upload resume</h2>
-        <p className="section-subtitle">
-          Drag &amp; drop your resume or select a file. We currently support{" "}
-          <strong>PDF</strong> and <strong>Word</strong> documents.
+    <div className="upload-card">
+      <div className="upload-card-header">
+        <h2 className="upload-title">Drop your resume into orbit</h2>
+        <p className="upload-subtitle">
+          We’ll read the PDF, extract the text, and get it ready for your AI
+          analysis layer.
         </p>
       </div>
 
@@ -90,6 +85,7 @@ export function UploadSection({
         onDragLeave={onDragLeave}
         onClick={openFileDialog}
       >
+        <span className="dropzone-glow" />
         <input
           ref={inputRef}
           type="file"
@@ -97,14 +93,25 @@ export function UploadSection({
           onChange={onFileInputChange}
           className="file-input"
         />
-        <div className="dropzone-icon">⬆</div>
-        <p className="dropzone-title">
-          Drop your resume here or <span className="link-like">browse</span>
-        </p>
-        <p className="dropzone-hint">Max 5 MB. PDF or DOCX recommended.</p>
+
+        <div className="dropzone-inner">
+          <div className="dropzone-orbit">
+            <span className="dropzone-orbit-dot" />
+          </div>
+          <div className="dropzone-copy">
+            <p className="dropzone-title">
+              Drag &amp; drop a PDF resume
+            </p>
+            <p className="dropzone-hint">
+              or <span className="link-like">choose a file</span> from your
+              device
+            </p>
+          </div>
+        </div>
 
         {selectedFile && !error && (
           <div className="file-pill">
+            <span className="file-dot" />
             <span className="file-name">{selectedFile.name}</span>
             <span className="file-meta">
               {(selectedFile.size / 1024).toFixed(1)} KB
@@ -118,11 +125,17 @@ export function UploadSection({
       <button
         type="button"
         className="primary-button"
-        disabled={!selectedFile || isAnalyzing}
+        disabled={!selectedFile}
         onClick={onAnalyze}
       >
-        {isAnalyzing ? "Analyzing…" : "Analyze resume"}
+        <span className="primary-button-glow" />
+        <span>Analyze resume</span>
       </button>
+
+      <p className="upload-footnote">
+        Works best with clean, single‑column resumes. This demo focuses purely
+        on UI — plug in your own AI logic behind the button.
+      </p>
     </div>
   );
 }
