@@ -147,7 +147,7 @@ You can extend this structure with additional folders like `api/`, `hooks/`, or 
 
 ### 👤 Author
 
-- **Name**: *Your Name Here*  
+- **Name**: Krishna Sharma 
 - **GitHub**: [`@your-github-handle`](https://github.com/your-github-handle)  
 - **LinkedIn**: *Optional – add a LinkedIn URL if you want recruiters to find you easily.*
 
