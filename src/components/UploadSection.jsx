@@ -56,10 +56,9 @@ export function UploadSection({ selectedFile, onFileSelected, onAnalyze }) {
     setIsDragging(false);
   };
 
-  const openFileDialog = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
-    }
+  const openFileDialog = (e) => {
+    e.stopPropagation();
+    if (inputRef.current) inputRef.current.click();
   };
 
   return (
@@ -67,7 +66,7 @@ export function UploadSection({ selectedFile, onFileSelected, onAnalyze }) {
       <div className="upload-card-header">
         <h2 className="upload-title">Drop your resume into orbit</h2>
         <p className="upload-subtitle">
-          We’ll read the PDF, extract the text, and get it ready for your AI
+          We&apos;ll read the PDF, extract the text, and get it ready for your AI
           analysis layer.
         </p>
       </div>
@@ -78,8 +77,8 @@ export function UploadSection({ selectedFile, onFileSelected, onAnalyze }) {
           isDragging ? "dropzone-active" : "",
           error ? "dropzone-error" : "",
         ]
-          .join(" ")
-          .trim()}
+          .filter(Boolean)
+          .join(" ")}
         onDrop={onDrop}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
@@ -99,12 +98,9 @@ export function UploadSection({ selectedFile, onFileSelected, onAnalyze }) {
             <span className="dropzone-orbit-dot" />
           </div>
           <div className="dropzone-copy">
-            <p className="dropzone-title">
-              Drag &amp; drop a PDF resume
-            </p>
+            <p className="dropzone-title">Drag &amp; drop a PDF resume</p>
             <p className="dropzone-hint">
-              or <span className="link-like">choose a file</span> from your
-              device
+              or <span className="link-like">choose a file</span> from your device
             </p>
           </div>
         </div>
@@ -126,10 +122,13 @@ export function UploadSection({ selectedFile, onFileSelected, onAnalyze }) {
         type="button"
         className="primary-button"
         disabled={!selectedFile}
-        onClick={onAnalyze}
+        onClick={(e) => {
+          e.stopPropagation();
+          onAnalyze();
+        }}
       >
         <span className="primary-button-glow" />
-        <span>Analyze resume</span>
+        Analyze resume
       </button>
 
       <p className="upload-footnote">
@@ -139,4 +138,3 @@ export function UploadSection({ selectedFile, onFileSelected, onAnalyze }) {
     </div>
   );
 }
-

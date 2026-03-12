@@ -1,45 +1,27 @@
 import React, { useState } from "react";
 import { UploadSection } from "./components/UploadSection.jsx";
 import { ResultDashboard } from "./components/ResultDashboard.jsx";
-import { extractText } from "./utils/pdfParser.js";
 
 export default function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [hasAnalyzed, setHasAnalyzed] = useState(false);
 
-const handleAnalyze = async () => {
-  if (!selectedFile) return;
-
-  const resumeText = await extractText(selectedFile);
-
-  console.log(resumeText);
-  console.log(text.length);
-  console.log("Extracted Resume Text:");
-
-  setHasAnalyzed(true);
-};
+  const handleAnalyze = () => {
+    if (!selectedFile) return;
+    setHasAnalyzed(true);
+  };
 
   return (
     <div className="shell">
       <div className="shell-gradient" />
 
-      <header className="shell-header">
-        <div className="brand-mark">
-          <span className="brand-orbit" />
-          <span className="brand-initials">AI</span>
-        </div>
-        <div className="brand-copy">
-          <h1 className="hero-title">AI Resume Analyzer</h1>
-          <p className="hero-subtitle">
-            A calm, focused space to stress‑test your resume with AI before it
-            meets a real recruiter.
-          </p>
-        </div>
-      </header>
-
       <main className="shell-main">
         <section className="hero-layout">
           <div className="hero-column">
+            <div className="brand-mark">
+              <span className="brand-orbit" />
+              <span className="brand-initials">AI</span>
+            </div>
             <div className="hero-pill">Built for modern job searches</div>
             <h2 className="hero-heading">
               Upload a resume.{" "}
@@ -52,12 +34,23 @@ const handleAnalyze = async () => {
             </p>
             <ul className="hero-list">
               <li>Glassmorphism interface that keeps the focus on your content.</li>
-              <li>Soft micro‑interactions instead of noisy charts.</li>
+              <li>Soft micro-interactions instead of noisy charts.</li>
               <li>Designed to feel like a polished SaaS product.</li>
             </ul>
+
+            <div className="results-wrapper">
+              <ResultDashboard hasAnalyzed={hasAnalyzed} />
+            </div>
           </div>
 
           <div className="hero-card-column">
+            <header className="shell-header">
+              <h1 className="hero-title">AI Resume Analyzer</h1>
+              <p className="hero-subtitle">
+                A calm, focused space to stress‑test your resume with AI before it
+                meets a real recruiter.
+              </p>
+            </header>
             <div className="upload-shell">
               <UploadSection
                 selectedFile={selectedFile}
@@ -66,10 +59,6 @@ const handleAnalyze = async () => {
               />
             </div>
           </div>
-        </section>
-
-        <section className="results-layout">
-          <ResultDashboard hasAnalyzed={hasAnalyzed} />
         </section>
       </main>
 
@@ -82,4 +71,3 @@ const handleAnalyze = async () => {
     </div>
   );
 }
-
