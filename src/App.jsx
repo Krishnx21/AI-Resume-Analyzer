@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { UploadSection } from "./components/UploadSection.jsx";
 import { ResultDashboard } from "./components/ResultDashboard.jsx";
-import 
+import { extractText } from "./utils/pdfParser.js";
 
 export default function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [hasAnalyzed, setHasAnalyzed] = useState(false);
 
-  const handleAnalyze = () => {
-    if (!selectedFile) return;
-    setHasAnalyzed(true);
-  };
+const handleAnalyze = async () => {
+  if (!selectedFile) return;
 
-  const text = await extractText(selectedFile);
+  const resumeText = await extractText(selectedFile);
+
+  console.log(resumeText);
+  console.log(text.length);
+  console.log("Extracted Resume Text:");
+
+  setHasAnalyzed(true);
+};
 
   return (
     <div className="shell">

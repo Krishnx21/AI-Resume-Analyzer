@@ -2,30 +2,39 @@
   "hash": "18a1e713",
   "configHash": "bb2e4542",
   "lockfileHash": "a656a17f",
-  "browserHash": "36a62fb0",
+  "browserHash": "2dc889f1",
   "optimized": {
     "react/jsx-dev-runtime": {
       "src": "../../node_modules/react/jsx-dev-runtime.js",
       "file": "react_jsx-dev-runtime.js",
-      "fileHash": "88168c43",
+      "fileHash": "0fc6893f",
       "needsInterop": true
     },
     "react": {
       "src": "../../node_modules/react/index.js",
       "file": "react.js",
-      "fileHash": "9b467db0",
+      "fileHash": "0410b35a",
       "needsInterop": true
     },
     "react-dom/client": {
       "src": "../../node_modules/react-dom/client.js",
       "file": "react-dom_client.js",
-      "fileHash": "87535288",
+      "fileHash": "e3d7fe27",
       "needsInterop": true
+    },
+    "pdfjs-dist": {
+      "src": "../../node_modules/pdfjs-dist/build/pdf.mjs",
+      "file": "pdfjs-dist.js",
+      "fileHash": "88a6e223",
+      "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-SS3IWWB5": {
-      "file": "chunk-SS3IWWB5.js"
+    "chunk-FUGR7E7M": {
+      "file": "chunk-FUGR7E7M.js"
+    },
+    "chunk-X34TS6PR": {
+      "file": "chunk-X34TS6PR.js"
     }
   }
 }
