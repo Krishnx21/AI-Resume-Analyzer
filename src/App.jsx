@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { UploadSection } from "./components/UploadSection.jsx";
 import { ResultDashboard } from "./components/ResultDashboard.jsx";
+import 
 
 export default function App() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -10,6 +11,8 @@ export default function App() {
     if (!selectedFile) return;
     setHasAnalyzed(true);
   };
+
+  const text = await extractText(selectedFile);
 
   return (
     <div className="shell">
