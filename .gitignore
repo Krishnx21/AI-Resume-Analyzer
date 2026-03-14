@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Local env (never commit API keys)
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+.vite-cache/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

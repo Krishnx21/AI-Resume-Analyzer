@@ -9,7 +9,7 @@ const ACCEPTED_TYPES = [
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];
 
-export function UploadSection({ selectedFile, onFileSelected, onAnalyze }) {
+export function UploadSection({ selectedFile, onFileSelected, apiKey, onApiKeyChange, onAnalyze, isAnalyzing }) {
   const inputRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState("");
@@ -121,14 +121,14 @@ export function UploadSection({ selectedFile, onFileSelected, onAnalyze }) {
       <button
         type="button"
         className="primary-button"
-        disabled={!selectedFile}
+        disabled={!selectedFile || isAnalyzing}
         onClick={(e) => {
           e.stopPropagation();
           onAnalyze();
         }}
       >
         <span className="primary-button-glow" />
-        Analyze resume
+        {isAnalyzing ? "Analyzing…" : "Analyze resume"}
       </button>
 
       <p className="upload-footnote">
