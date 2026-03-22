@@ -256,7 +256,7 @@ body {
 }
 
 .api-key-input:focus {
-  border-color: rgba(100, 102, 221, 0.7);
+  border-color: rgba(91, 93, 198, 0.7);
 }
 
 .dropzone {
