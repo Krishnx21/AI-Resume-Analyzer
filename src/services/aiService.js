@@ -21,7 +21,7 @@ function getApiKey(passedKey) {
 export async function analyzeResume(resumeText, options = {}) {
   const API_KEY = getApiKey(options.apiKey);
 
-  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  const response = await fetch("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", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
