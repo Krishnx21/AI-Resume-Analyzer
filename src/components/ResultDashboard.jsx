@@ -9,7 +9,7 @@ const DEMO_MISSING_SKILLS = [
 const DEMO_SUGGESTIONS = [
   {
     title: "Tell a sharper story in your summary",
-    body: "Open with one sentence that anchors your role, years of experience, and the type of problems you love solving.",
+    body: "Open with one sentence that anchors your role, years of experience, and the type of problems you love solving..",
   },
   {
     title: "Quantify 2–3 more achievements",
